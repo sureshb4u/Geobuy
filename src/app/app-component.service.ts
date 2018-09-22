@@ -13,12 +13,21 @@ export class AppComponentService {
 
   constructor(private apiConfig: ApiConfigService, private http : HttpClient) { }
 
-  getJsonData(data: Object): Observable<any> {
+  getMasterCategory(): Observable<any> {
     
-      var url = this.apiConfig.hostUrl+this.apiConfig.baseUrl+"login";
+      var url = this.apiConfig.hostUrl+"categorymaster";
       console.log('url ::'+url );
-      return this.http.post<any>(url, data).pipe(
+      return this.http.get<any>(url).pipe(
         tap((res) => console.log(res))
       );
     }
+
+    getCategories(): Observable<any> {
+      
+        var url = this.apiConfig.hostUrl+"categories";
+        console.log('url ::'+url );
+        return this.http.get<any>(url).pipe(
+          tap(res => console.log(res))
+        );
+      }
 }
