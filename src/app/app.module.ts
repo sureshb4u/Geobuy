@@ -5,10 +5,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppComponentService } from './app-component.service';
 import { ApiConfigService } from './api-config.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
