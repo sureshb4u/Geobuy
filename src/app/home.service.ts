@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AppComponentService {
+export class HomeService {
 
   constructor(private apiConfig: ApiConfigService, private http : HttpClient) { }
 
@@ -30,4 +30,12 @@ export class AppComponentService {
           tap(res => console.log(res))
         );
       }
+
+    getTrendings(): Observable<any> {
+      var url = this.apiConfig.hostUrl+"trendings";
+      console.log('url ::'+url );
+      return this.http.get<any>(url).pipe(
+        tap(res => console.log(res))
+      );
+    }
 }

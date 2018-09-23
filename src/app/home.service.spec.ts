@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppComponentService } from './app-component.service';
+import { HomeService } from './home.service';
 
 describe('AppComponentService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AppComponentService = TestBed.get(AppComponentService);
+    const service: HomeService = TestBed.get(HomeService);
     expect(service).toBeTruthy();
   });
 });
