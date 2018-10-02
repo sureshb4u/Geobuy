@@ -9,13 +9,15 @@ import { ProductsComponent } from './products/products.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { GlobalFilterComponent } from './global-filter/global-filter.component';
+import { GlobalDetailsComponent } from './global-details/global-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     HomeComponent,
-    GlobalFilterComponent
+    GlobalFilterComponent,
+    GlobalDetailsComponent
   ],
   imports: [
     BrowserModule,
