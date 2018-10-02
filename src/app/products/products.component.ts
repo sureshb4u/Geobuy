@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import{ ProductsService} from '../products.service';
 import{ HomeService} from '../home.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -8,7 +10,7 @@ import{ HomeService} from '../home.service';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productsService : ProductsService, private homeService: HomeService) { }
+  constructor(private productsService : ProductsService, private homeService: HomeService, public router: ActivatedRoute) {  }
 
   products =[];
   masterCategories;
@@ -16,6 +18,7 @@ export class ProductsComponent implements OnInit {
   categoryNameMap={};
 
   ngOnInit() {
+    
     this.homeService.getMasterCategory()
       .subscribe(response => this.masterCategories = response) ;
       this.homeService.getCategories()
@@ -28,10 +31,14 @@ export class ProductsComponent implements OnInit {
           }
         }
       }) ;
-    this.getProducts();
+      this.router.queryParams.subscribe(params => {
+        console.log(params);
+        this.getProducts(params);
+     })
+   
   }
 
-  getProducts() {
-    this.productsService.getProducts().subscribe(response => this.products = response);
+  getProducts(params) {
+    this.productsService.getProducts(params).subscribe(response => this.products = response);
   }
 }
