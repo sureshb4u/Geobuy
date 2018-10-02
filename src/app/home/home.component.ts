@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
             this.categoryNameMap[subcategories[j].id] = subcategories[j].tittle;
           }
         }
-
       }) ;
       this.getTrendingProducts();
     }
@@ -36,6 +35,14 @@ export class HomeComponent implements OnInit {
       this.appService.getTrendings().subscribe(response => this.trendings = response);
     }
 
+    
+  
+  
+
+
+    textChange(searchText ){
+        console.log(searchText);
+    }
   }
 
   
