@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { GlobalFilterComponent } from './global-filter/global-filter.component';
 import { GlobalDetailsComponent } from './global-details/global-details.component';
+import { AgmCoreModule } from '@agm/core';
+import { SellerDetailsComponent } from './seller-details/seller-details.component'
 
 @NgModule({
   declarations: [
@@ -17,13 +19,17 @@ import { GlobalDetailsComponent } from './global-details/global-details.componen
     ProductsComponent,
     HomeComponent,
     GlobalFilterComponent,
-    GlobalDetailsComponent
+    GlobalDetailsComponent,
+    SellerDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBvwXT0zFwYna9p2CcAyHDmdRyeemlwnes'
+    })
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ApiConfigService, HomeService],

@@ -165,8 +165,8 @@
 			<div class="col-md-4">
 				<div class="sidebar">
 						<div class="widget map">
-								<h5 class="widget-header">Seller info</h5>
-								<div class="btn-group" mdbDropdown>
+								<h5 class="widget-header">Seller location</h5>
+							<!--	<div class="btn-group" mdbDropdown>
 										<button mdbDropdownToggle type="button" mdbBtn color="info" class="dropdown-toggle waves-light" mdbWavesEffect>
 												{{product.orgname}}
 										</button>
@@ -175,7 +175,12 @@
 											<a class="dropdown-item" href="/details?id={{seller.id}}"  *ngFor="let seller of productDetails; let i = index">{{seller.orgname}}</a>
 										</div>
 									</div>
-										
+								-->
+								<agm-map [latitude]="product.lat" [longitude]="product.lon"  style="height: 300px" minZoom="9">
+									<agm-marker *ngFor="let seller of productDetails; let i = index" label="{{seller.orgname}}"
+									icon="fa shopping-bag"
+									 [latitude]="seller.lat" [longitude]="seller.lon"></agm-marker>
+								</agm-map>		
 		
 						</div>
 					<div class="widget price text-center">

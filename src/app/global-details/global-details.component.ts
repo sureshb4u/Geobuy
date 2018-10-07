@@ -16,12 +16,6 @@ export class GlobalDetailsComponent implements OnInit {
   product ={};
   productDetails=[];
   selected=0;
-  longitude = 20.728218;
-  latitude = 52.128973;
-  public radioModel: string = 'Left';
-  markers = [
-  { latitude: 52.228973, longitude: 20.728218 }
-  ];
   optionsSelect: Array<any>;
 
   categories = [];
@@ -62,12 +56,6 @@ export class GlobalDetailsComponent implements OnInit {
 }
 
 
-placeMarker(position: any) {
-  const lat = position.coords.lat;
-  const lng = position.coords.lng;
-
-  this.markers.push({ latitude: lat, longitude: lng });
-}
   getProducts(params) {
     this.productsService.getProductDetails(params).subscribe(response =>{ 
       this.productDetails = response.productDetails;
