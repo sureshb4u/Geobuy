@@ -18,4 +18,12 @@ export class ProductsService {
         tap((res) => console.log(res))
       );
   }
+
+  getProductDetails(params): Observable<any> {
+    var url = this.apiConfig.hostUrl+"productDetails?id="+params.id;
+      console.log('url ::'+url );
+      return this.http.get<any>(url).pipe(
+        tap((res) => console.log(res))
+      );
+  }
 }
