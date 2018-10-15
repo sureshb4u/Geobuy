@@ -35,13 +35,8 @@ export class HomeComponent implements OnInit {
       this.appService.getTrendings().subscribe(response => this.trendings = response);
     }
 
-    
-  
-  
-
-
-    textChange(searchText ){
-        console.log(searchText);
+    setLocation(selectedLocation ){
+        console.log(selectedLocation);
     }
   }
 
