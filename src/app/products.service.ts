@@ -20,7 +20,8 @@ export class ProductsService {
   }
 
   getProductDetails(params): Observable<any> {
-    var url = this.apiConfig.hostUrl+"productDetails?id="+params.id;
+  //  var url = this.apiConfig.hostUrl+"productDetails?id="+params.id;
+    var url = this.apiConfig.addQueryParams('productDetails',params);
       console.log('url ::'+url );
       return this.http.get<any>(url).pipe(
         tap((res) => console.log(res))

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import{ ProductsService} from '../products.service';
 import { ActivatedRoute } from '@angular/router';
 import{ HomeService} from '../home.service';
@@ -9,51 +9,50 @@ import{ HomeService} from '../home.service';
   styleUrls: ['./global-details.component.scss']
 })
 
-export class GlobalDetailsComponent implements OnInit {
+export class GlobalDetailsComponent implements OnInit, AfterViewInit {
 
+  ngAfterViewInit(): void {
+    
+  }
   constructor(private productsService : ProductsService, public router: ActivatedRoute, private appService: HomeService) { }
-  public map: any = { lat: 51.678418, lng: 7.809007 };
   product ={};
   productDetails=[];
   selected=0;
   optionsSelect: Array<any>;
-
   categories = [];
   categoryNameMap={};
 
   ngOnInit() {
+    
+    this.appService.getCategories()
+    .subscribe(response => {
+      this.categories = response.data
+      for(var i=0; i<this.categories.length; i++){
+        var subcategories = this.categories[i].subcategory;
+        for(var j=0; j<subcategories.length; j++){
+          this.categoryNameMap[subcategories[j].id] = subcategories[j].tittle;
+        }
+      }
+    }) ;
+
     if(window.navigator.geolocation){
-        window.navigator.geolocation.getCurrentPosition(this.showPosition);
+        window.navigator.geolocation.getCurrentPosition(position => {
+          this.router.queryParams.subscribe(params => {
+            var qP ={"lat": position.coords.latitude, "lon" : position.coords.longitude, "id" :params.id, "sid" : params.sid};
+            this.getProducts(qP);
+         })
+        });
     } else {
-      console.log(window.navigator.geolocation);
+        this.router.queryParams.subscribe(params => {
+          var qP ={ "id" :params.id, "sid" : params.sid};
+          this.getProducts(qP);
+      })
     }
   
-      this.appService.getCategories()
-      .subscribe(response => {
-        this.categories = response.data
-        for(var i=0; i<this.categories.length; i++){
-          var subcategories = this.categories[i].subcategory;
-          for(var j=0; j<subcategories.length; j++){
-            this.categoryNameMap[subcategories[j].id] = subcategories[j].tittle;
-          }
-        }
-      }) ;
-    this.router.queryParams.subscribe(params => {
-      console.log(params);
-      this.getProducts(params);
-   })
+     
 
-      this.optionsSelect = [
-          { value: '1', label: 'Option 1' },
-          { value: '2', label: 'Option 2' },
-          { value: '3', label: 'Option 3' },
-      ];
+      
   }
-
-  showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude); 
-}
 
 
   getProducts(params) {
@@ -70,4 +69,41 @@ export class GlobalDetailsComponent implements OnInit {
         this.product = response.productDetails[0];
     });
   }
+
+  onClickInfoView(params){
+    console.log(params);
+      if(params.orgid) {
+        var sellerId = params.orgid;  
+        for(var i=0; i<this.productDetails.length; i++) {
+          if(this.productDetails[i].orgid == sellerId) {
+            this.product = this.productDetails[i];
+          }
+        }
+      } else
+        this.product = this.productDetails[0];
+  }
+
+  calculatePrice(product) {
+      var discount = 0;
+      if(product.offer > 0) {
+        discount = (parseFloat(product.offer) / 100) * product.price;
+      }
+      return parseFloat(''+(product.price - discount)).toFixed(0);
+  }
+
+  getReviewsLength(reviews){
+    if(reviews) {
+      var no =0;
+      for(var i= 0; i <reviews.length; i++) {
+          if(reviews[i].review) {
+            no++;
+          }
+
+          if(i == reviews.length-1)
+            return no +' reviews';
+      }
+    } else
+        return 'No reviews yet';
+  }
 }
+

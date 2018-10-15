@@ -10,7 +10,7 @@
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">{{product.orgname}}</a></li>
 							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">{{categoryNameMap[product.subcategory]}}</a></li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+							<li *ngIf="product.distance" class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href=""> {{product.distance}} Km away</a></li>
 						</ul>
 					</div>
 					<div id="carouselExampleIndicators" class="product-slider carousel slide" data-ride="carousel">
@@ -44,7 +44,7 @@
 								<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Reviews</a>
 							</li>
 						</ul> -->
-						<div class="tab-content" id="pills-tabContent">
+						<div class="tab-content">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<h3 class="tab-title">Product Highlights</h3>
 								<p *ngFor="let highlight of product.highlights; let i = index" > {{i+1}}. {{highlight}}</p>
@@ -92,12 +92,13 @@
 								  </tbody>
 								</table>
 							</div>
-							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+							<div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								<h3 class="tab-title">Product Review</h3>
-								<div class="product-review">
-							  		<div class="media">
-							  			<!-- Avater -->
-							  			<img src="assets/images/user/user-thumb.jpg" alt="avater">
+								<div  *ngFor="let review of product.reviews; let i = index">
+									<div class="product-review" *ngIf="review.review">
+							  		<div class="media" >
+										  <!-- Avater -->
+
 							  			<div class="media-body">
 							  				<!-- Ratings -->
 							  				<div class="ratings">
@@ -120,42 +121,21 @@
 							  					</ul>
 							  				</div>
 							  				<div class="name">
-							  					<h5>Jessica Brown</h5>
+							  					<h5>{{review.heading}}</h5>
 							  				</div>
 							  				<div class="date">
-							  					<p>Mar 20, 2018</p>
+							  					<span>{{review.time}}</span> , <span>{{review.user}}</span>
 							  				</div>
 							  				<div class="review-comment">
 							  					<p>
-							  						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape riamipsa eaque.
+							  						{{review.review}}
 							  					</p>
 							  				</div>
 							  			</div>
 							  		</div>
-							  		<div class="review-submission">
-							  			<h3 class="tab-title">Submit your review</h3>
-						  				<!-- Rate -->
-						  				<div class="rate">
-						  					<div class="starrr"></div>
-						  				</div>
-						  				<div class="review-submit">
-						  					<form action="#" class="row">
-						  						<div class="col-lg-6">
-						  							<input type="text" name="name" id="name" class="form-control" placeholder="Name">
-						  						</div>
-						  						<div class="col-lg-6">
-						  							<input type="email" name="email" id="email" class="form-control" placeholder="Email">
-						  						</div>
-						  						<div class="col-12">
-						  							<textarea name="review" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
-						  						</div>
-						  						<div class="col-12">
-						  							<button type="submit" class="btn btn-main">Sumbit</button>
-						  						</div>
-						  					</form>
-						  				</div>
-							  		</div>
-							  	</div>
+							  		
+								  	</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -164,7 +144,7 @@
 			<div class="col-md-4">
 				<div class="sidebar">
 						<div class="widget map">
-								<h5 class="widget-header">Seller location</h5>
+								<h5 class="widget-header">{{productDetails.length}} seller(s) found</h5>
 							<!--	<div class="btn-group" mdbDropdown>
 										<button mdbDropdownToggle type="button" mdbBtn color="info" class="dropdown-toggle waves-light" mdbWavesEffect>
 												{{product.orgname}}
@@ -175,15 +155,30 @@
 										</div>
 									</div>
 								-->
-								<agm-map [latitude]="product.lat" [longitude]="product.lon"  style="height: 200px" minZoom="9">
-									<agm-marker *ngFor="let seller of productDetails; let i = index" label="{{seller.orgname}}"
-									 [latitude]="seller.lat" [longitude]="seller.lon"></agm-marker>
+								<agm-map [latitude]="product.lat" [longitude]="product.lon"  style="height: 200px" >
+									<agm-marker *ngFor="let seller of productDetails; let i = index"
+									 [latitude]="seller.lat" [longitude]="seller.lon">
+										<agm-info-window [disableAutoPan]="true" #infoWindow>
+
+											<div>
+												 <span class="green-text"> <b>₹ {{calculatePrice(seller)}} </b> </span> | {{seller.orgname}} ,
+											</div>
+											<div *ngIf="seller.distance">
+												{{seller.distance}} Km away
+											</div>
+											<div>
+												<a (click)="onClickInfoView({orgid:seller.orgid})" >Select </a>
+											</div>
+								
+										</agm-info-window>
+									</agm-marker>
 								</agm-map>		
 		
 						</div>
-					<div class="widget text-center" style="background:#333">
+					<div class="widget text-center" style="background:#333" *ngIf="product.price">
 						<!--<h4>Price</h4> -->
-						<h3 class="text-white">₹ {{product.price}}</h3>
+						<h4> <span class="text-white" >₹ {{calculatePrice(product)}} </span></h4>
+						<div *ngIf="product.offer"> <span class="yellow-text" style="text-decoration: line-through;padding-right: 10px">₹ {{product.price}}</span> <span class="green-text" > {{product.offer}}% off</span> </div>
 						<button mdbBtn type="button" class="waves-light add-button" mdbWavesEffect>Buy now</button>
 						<button mdbBtn type="button" color="warning" class="waves-light" mdbWavesEffect>Add to Cart</button>
 						
@@ -205,20 +200,51 @@
 					<!-- Rate Widget -->
 					<div class="widget rate">
 						<!-- Heading -->
-						<h5  class="widget-header text-center"> {{product.rating}}
-								<ul class="list-inline">
-										<li class="list-inline-item selected"><i ngClass="{'fa fa-star-o' : product.rating == 0 , 'fa fa-star' : product.rating > 1}"></i></li>
-										<li class="list-inline-item selected"><i class="fa fa-star-o"></i></li>
-										<li class="list-inline-item selected"><i class="fa fa-star-o"></i></li>
-										<li class="list-inline-item selected"><i class="fa fa-star-o"></i></li>
-										<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-								</ul>
 						
+						<h5  class="widget-header text-center"> {{product.rating}}
+								<ul class="list-inline" *ngIf="!product.rating">
+										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>	
+								</ul>
+								<ul class="list-inline" *ngIf="product.rating">
+										<li class="list-inline-item selected">
+											<mdb-icon *ngIf="product.rating == 0 || product.rating ==''" icon="star-o"></mdb-icon> 
+											<mdb-icon *ngIf="product.rating > 1 || product.rating==1" icon="star"></mdb-icon> 
+											<mdb-icon *ngIf="product.rating > 0 && product.rating <1" icon="star-half-o"></mdb-icon> 
+										</li>
+										<li class="list-inline-item selected">
+												<mdb-icon *ngIf="product.rating == 0 || product.rating ==''  || product.rating <= 1" icon="star-o"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 2 || product.rating==2" icon="star"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 1 && product.rating <2" icon="star-half-o"></mdb-icon> 
+										</li>
+										<li class="list-inline-item selected">
+												<mdb-icon *ngIf="product.rating == 0 || product.rating =='' || product.rating <= 2" icon="star-o"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 3 || product.rating==3" icon="star"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 2 && product.rating <3" icon="star-half-o"></mdb-icon> 
+										</li>
+										<li class="list-inline-item selected">
+												<mdb-icon *ngIf="product.rating == 0 || product.rating =='' || product.rating <= 3" icon="star-o"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 4 || product.rating==4" icon="star"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 3 && product.rating <4" icon="star-half-o"></mdb-icon> 
+										</li>
+										<li class="list-inline-item selected">
+												<mdb-icon *ngIf="product.rating == 0 || product.rating =='' || product.rating <= 4" icon="star-o"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 5 || product.rating==5" icon="star"></mdb-icon> 
+												<mdb-icon *ngIf="product.rating > 4 && product.rating <5" icon="star-half-o"></mdb-icon> 
+										</li>
+									</ul>
+									
 						</h5>
 						<!-- Rate -->
 						<div class="starrr">
 
-							<h4>{{product.reviews.length}} reviews</h4>
+							<h4 *ngIf="product.reviews"><span>{{product.reviews.length}} ratings</span> & <span>{{getReviewsLength(product.reviews)}}</span></h4>
+							<div *ngIf="!product.rating">
+									No reviews & ratings yet
+							</div>
 						</div>
 					</div>
 					<!-- Safety tips widget -->

@@ -72,7 +72,7 @@
 							<div class="product-item bg-light">
 								<div class="card">
 									<div class="thumb-content" *ngIf="pro.productDetails[0].image">
-										 <div class="price">₹ {{pro.price}}</div> 
+										 <div class="price">₹ {{calculatePrice(pro.productDetails[0])}}</div> 
 										<a href="/details?id={{pro.productDetails[0].id}}">
 											<img class="card-img-top img-fluid" src="{{pro.productDetails[0].image[0]}}" alt="{{pro.productDetails[0].title}}" style="height:200px; width:75%;margin-top: 20px;margin-left: 30px;">
 										</a>
@@ -89,13 +89,41 @@
 										</ul>
 										<!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p> -->
 										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
+											<!-- <ul class="list-inline" *ngIf="!pro.productDetails[0].rating">
+													<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+													<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+													<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+													<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
+													<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>	
+											</ul>-->
+											<ul class="list-inline" *ngIf="pro.productDetails[0].rating">
+													<li class="list-inline-item selected" >
+														<mdb-icon *ngIf="pro.productDetails[0].rating == 0 || pro.productDetails[0].rating ==''" icon="star-o"></mdb-icon> 
+														<mdb-icon *ngIf="pro.productDetails[0].rating > 1 || pro.productDetails[0].rating==1" icon="star"></mdb-icon> 
+														<mdb-icon *ngIf="pro.productDetails[0].rating > 0 && pro.productDetails[0].rating <1" icon="star-half-o"></mdb-icon> 
+													</li>
+													<li class="list-inline-item selected">
+															<mdb-icon *ngIf="pro.productDetails[0].rating == 0 || pro.productDetails[0].rating ==''  || pro.productDetails[0].rating <= 1" icon="star-o"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 2 || pro.productDetails[0].rating==2" icon="star"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 1 && pro.productDetails[0].rating <2" icon="star-half-o"></mdb-icon> 
+													</li>
+													<li class="list-inline-item selected">
+															<mdb-icon *ngIf="pro.productDetails[0].rating == 0 || pro.productDetails[0].rating =='' || pro.productDetails[0].rating <= 2" icon="star-o"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 3 || pro.productDetails[0].rating==3" icon="star"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 2 && pro.productDetails[0].rating <3" icon="star-half-o"></mdb-icon> 
+													</li>
+													<li class="list-inline-item selected">
+															<mdb-icon *ngIf="pro.productDetails[0].rating == 0 || pro.productDetails[0].rating =='' || pro.productDetails[0].rating <= 3" icon="star-o"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 4 || pro.productDetails[0].rating==4" icon="star"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 3 && pro.productDetails[0].rating <4" icon="star-half-o"></mdb-icon> 
+													</li>
+													<li class="list-inline-item selected">
+															<mdb-icon *ngIf="pro.productDetails[0].rating == 0 || pro.productDetails[0].rating =='' || pro.productDetails[0].rating <= 4" icon="star-o"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating==5" icon="star"></mdb-icon> 
+															<mdb-icon *ngIf="pro.productDetails[0].rating > 4 && pro.productDetails[0].rating <5" icon="star-half-o"></mdb-icon> 
+													</li>
+													<li *ngIf="pro.productDetails[0].rating" class="list-inline-item selected">{{pro.productDetails[0].rating}} ({{pro.productDetails[0].reviews.length}} ratings)</li>
+												</ul>
 										</div>
 									</div>
 								</div>

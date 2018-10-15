@@ -41,4 +41,12 @@ export class ProductsComponent implements OnInit {
   getProducts(params) {
     this.productsService.getProducts(params).subscribe(response => this.products = response);
   }
+
+  calculatePrice(product) {
+    var discount = 0;
+    if(product.offer > 0) {
+      discount = (parseFloat(product.offer) / 100) * product.price;
+    }
+    return parseFloat(''+(product.price - discount)).toFixed(0);
+}
 }
