@@ -15,7 +15,7 @@ export class GlobalDetailsComponent implements OnInit, AfterViewInit {
     
   }
   constructor(private productsService : ProductsService, public router: ActivatedRoute, private appService: HomeService) { }
-  product ={};
+  product:any;
   productDetails=[];
   selected=0;
   optionsSelect: Array<any>;
