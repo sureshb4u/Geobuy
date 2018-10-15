@@ -72,7 +72,7 @@
 							<div class="product-item bg-light">
 								<div class="card">
 									<div class="thumb-content" *ngIf="pro.productDetails[0].image">
-										 <div class="price">₹ {{calculatePrice(pro.productDetails[0])}}</div> 
+										 <div class="price" *ngIf="pro.productDetails[0].offer">{{pro.productDetails[0].offer}} % off</div> 
 										<a href="/details?id={{pro.productDetails[0].id}}">
 											<img class="card-img-top img-fluid" src="{{pro.productDetails[0].image[0]}}" alt="{{pro.productDetails[0].title}}" style="height:200px; width:75%;margin-top: 20px;margin-left: 30px;">
 										</a>
@@ -84,7 +84,7 @@
 												<a href=""><i class="fa fa-folder-open-o"></i>{{categoryNameMap[pro.productDetails[0].subcategory]}}</a>
 											</li>
 											<li class="list-inline-item">
-												<a href=""><i class="fa fa-calendar"></i>26th December</a>
+												<mdb-icon icon="rupee"></mdb-icon> <b> {{calculatePrice(pro.productDetails[0])}} </b>
 											</li>
 										</ul>
 										<!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p> -->
