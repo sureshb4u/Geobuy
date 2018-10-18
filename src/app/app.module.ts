@@ -13,7 +13,11 @@ import { GlobalFilterComponent } from './global-filter/global-filter.component';
 import { GlobalDetailsComponent } from './global-details/global-details.component';
 import { AgmCoreModule } from '@agm/core';
 import { SellerDetailsComponent } from './seller-details/seller-details.component';
+<<<<<<< HEAD
 import { SellerService } from './seller.service';
+=======
+import { GooglePlacesDirective } from './directives/google-places.directive'
+>>>>>>> 00069886da7206407ea272a1e380fc602ffece61
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { SellerService } from './seller.service';
     HomeComponent,
     GlobalFilterComponent,
     GlobalDetailsComponent,
-    SellerDetailsComponent
+    SellerDetailsComponent,
+    GooglePlacesDirective
   ],
   imports: [
     BrowserModule,
