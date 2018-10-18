@@ -12,7 +12,8 @@ export class ProductsService {
   constructor(private apiConfig: ApiConfigService, private http : HttpClient) { }
 
   getProducts(params): Observable<any> {
-    var url = this.apiConfig.hostUrl+"getProductsByCategory?category="+params.category;
+   // var url = this.apiConfig.hostUrl+"getProductsByCategory?category="+params.category;
+    var url = this.apiConfig.addQueryParams('getProductsByCategory',params);
       console.log('url ::'+url );
       return this.http.get<any>(url).pipe(
         tap((res) => console.log(res))
