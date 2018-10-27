@@ -11,18 +11,18 @@
 						<h2>Popular Category</h2>
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-shopping-basket"></i> Groceries</a></li>
+								<a routerLink=""><i class="fa fa-shopping-basket"></i> Groceries</a></li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-laptop"></i> Electronics</a>
+								<a routerLink=""><i class="fa fa-laptop"></i> Electronics</a>
 							</li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-plus-square"></i> Medical</a>
+								<a routerLink=""><i class="fa fa-plus-square"></i> Medical</a>
 							</li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-cutlery"></i> Restaurants</a>
+								<a routerLink=""><i class="fa fa-cutlery"></i> Restaurants</a>
 							</li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-coffee"></i> Cafe</a>
+								<a routerLink=""><i class="fa fa-coffee"></i> Cafe</a>
 							</li>
 						</ul>
 					</div>
@@ -36,7 +36,7 @@
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
 									
-									<input type="text"google-place (onSelect)="setLocation($event)" class="loactionInput form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search your location">
+									<input type="text" google-place (onSelect)="setLocation($event)" class="loactionInput form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search your location">
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-12">
@@ -88,18 +88,18 @@
 					<div class="card">
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
-							<a href="/details">
+							<a routerLink="/details">
 								<img class="card-img-top img-fluid" src="{{trending.image[0]}}" alt="Card image cap" style="height:275px; width:75%;margin-top: 20px;margin-left: 30px;">
 							</a>
 						</div>
 						<div class="card-body">
-							<h4 class="card-title"><a href="/details?id={{trending.id}}">{{trending.title}}</a></h4>
+							<h4 class="card-title"><a [routerLink]="['/details']" [queryParams]="{id:trending.id}">{{trending.title}}</a></h4>
 							<ul class="list-inline product-meta">
 								<li class="list-inline-item">
-									<a href=""><i class="fa fa-folder-open-o"></i>{{categoryNameMap[trending.subcategory]}}</a>
+									<a routerLink=""><i class="fa fa-folder-open-o"></i>{{categoryNameMap[trending.subcategory]}}</a>
 								</li>
 								<li class="list-inline-item">
-									<a href=""><i class="fa fa-calendar"></i>26th December</a>
+									<a routerLink=""><i class="fa fa-calendar"></i>26th December</a>
 								</li>
 							</ul>
 							<p class="card-text">{{trending.orgname}}</p>
@@ -149,7 +149,7 @@
 								<h4>{{mainCategory.name}}</h4>
 							</div>
 							<ul class="category-list" *ngFor="let category of categories">
-								<li><a href="/products?category={{category.id}}">{{category.tittle}} <span>93</span></a></li>
+								<li><a [routerLink]="['/products']" [queryParams]="{category:category.id}">{{category.tittle}} <span>93</span></a></li>
 							</ul>
 						</div>
 					</div>
