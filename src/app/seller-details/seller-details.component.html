@@ -1,6 +1,6 @@
-<section class="bg-gray">
+<section class="bg-gray" >
 	<!-- Container Start -->
-	<div class="container">
+	<div class="container" *ngIf="seller.orgname">
 		<div class="row">
 			<!-- Left sidebar -->
 			<div class="col-md-8">
@@ -227,7 +227,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="sidebar">
-						<div class="widget map">
+						<div class="widget map" >
 								<h5 class="widget-header">Seller location</h5>
 							<!--	<div class="btn-group" mdbDropdown>
 										<button mdbDropdownToggle type="button" mdbBtn color="info" class="dropdown-toggle waves-light" mdbWavesEffect>
@@ -258,65 +258,45 @@
 								</agm-map>		
 		
 						</div>
-					<div class="widget text-center" style="background:#333" >
-						<!--<h4>Price</h4> -->
-						<h4> <span class="text-white" >₹ 992 </span></h4>
-						<div > <span class="yellow-text" style="text-decoration: line-through;padding-right: 10px">₹ 849</span> <span class="green-text" > 98 off</span> </div>
-						<button mdbBtn type="button" class="waves-light add-button" mdbWavesEffect>Buy now</button>
-						<button mdbBtn type="button" color="warning" class="waves-light" mdbWavesEffect>Add to Cart</button>
-						
-					</div>
-					<!-- User Profile widget 
-					<div class="widget user">
-						<img class="rounded-circle" src="assets/images/user/user-thumb.jpg" alt="">
-						<h4><a href="">{{product.orgname}}</a></h4>
-						<p class="member-time">Member Since Jun 27, 2017</p>
-						<a href="">See all ads</a>
-						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="" class="btn btn-contact">Contact</a></li>
-							<li class="list-inline-item"><a href="" class="btn btn-offer">Make an offer</a></li>
-						</ul>
-					</div> -->
-					<!-- Map Widget -->
-			
+					
 				
 					<!-- Rate Widget -->
-					<div class="widget rate">
+					<div class="widget rate white-text" style="background :#c7003d">
 						<!-- Heading -->
 						
-						<h5  class="widget-header text-center"> {{seller.rating}}
+						<h5  class="widget-header text-center  white-text"> {{seller.rating}}
 								<ul class="list-inline" *ngIf="!seller.rating">
-										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
-										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
-										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
-										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>
-										<li class="list-inline-item selected"><mdb-icon icon="star-o"></mdb-icon></li>	
+										<li class="list-inline-item selected"><mdb-icon class="white-text" icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon class="white-text" icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon class="white-text" icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon class="white-text" icon="star-o"></mdb-icon></li>
+										<li class="list-inline-item selected"><mdb-icon class="white-text" icon="star-o"></mdb-icon></li>	
 								</ul>
 								<ul class="list-inline" *ngIf="seller.rating">
 										<li class="list-inline-item selected">
-											<mdb-icon *ngIf="seller.rating == 0 || seller.rating ==''" icon="star-o"></mdb-icon> 
-											<mdb-icon *ngIf="seller.rating > 1 || seller.rating==1" icon="star"></mdb-icon> 
-											<mdb-icon *ngIf="seller.rating > 0 && seller.rating <1" icon="star-half-o"></mdb-icon> 
+											<mdb-icon class="white-text" *ngIf="seller.rating == 0 || seller.rating ==''" icon="star-o"></mdb-icon> 
+											<mdb-icon class="white-text" *ngIf="seller.rating > 1 || seller.rating==1" icon="star"></mdb-icon> 
+											<mdb-icon class="white-text" *ngIf="seller.rating > 0 && seller.rating <1" icon="star-half-o"></mdb-icon> 
 										</li>
 										<li class="list-inline-item selected">
-												<mdb-icon *ngIf="seller.rating == 0 || seller.rating ==''  || seller.rating <= 1" icon="star-o"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 2 || seller.rating==2" icon="star"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 1 && seller.rating <2" icon="star-half-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating == 0 || seller.rating ==''  || seller.rating <= 1" icon="star-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 2 || seller.rating==2" icon="star"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 1 && seller.rating <2" icon="star-half-o"></mdb-icon> 
 										</li>
 										<li class="list-inline-item selected">
-												<mdb-icon *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 2" icon="star-o"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 3 || seller.rating==3" icon="star"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 2 && seller.rating <3" icon="star-half-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 2" icon="star-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 3 || seller.rating==3" icon="star"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 2 && seller.rating <3" icon="star-half-o"></mdb-icon> 
 										</li>
 										<li class="list-inline-item selected">
-												<mdb-icon *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 3" icon="star-o"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 4 || seller.rating==4" icon="star"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 3 && seller.rating <4" icon="star-half-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 3" icon="star-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 4 || seller.rating==4" icon="star"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 3 && seller.rating <4" icon="star-half-o"></mdb-icon> 
 										</li>
 										<li class="list-inline-item selected">
-												<mdb-icon *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 4" icon="star-o"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 5 || seller.rating==5" icon="star"></mdb-icon> 
-												<mdb-icon *ngIf="seller.rating > 4 && seller.rating <5" icon="star-half-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating == 0 || seller.rating =='' || seller.rating <= 4" icon="star-o"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 5 || seller.rating==5" icon="star"></mdb-icon> 
+												<mdb-icon class="white-text" *ngIf="seller.rating > 4 && seller.rating <5" icon="star-half-o"></mdb-icon> 
 										</li>
 									</ul>
 									
@@ -324,14 +304,14 @@
 						<!-- Rate -->
 						<div class="starrr">
 
-							<h4 *ngIf="seller.reviews"><span>{{seller.reviews.length}} ratings</span> & <span>{{getReviewsLength(seller.reviews)}}</span></h4>
-							<div *ngIf="!seller.rating">
+							<h4 *ngIf="seller.reviews"  class= "white-text"><span>{{seller.reviews.length}} ratings</span> & <span>{{getReviewsLength(seller.reviews)}}</span></h4>
+							<div *ngIf="!seller.rating" class= "white-text">
 									No reviews & ratings yet
 							</div>
 						</div>
 					</div>
 					<!-- Safety tips widget -->
-					<div class="widget disclaimer">
+					<div class="widget disclaimer" >
 						<h5 class="widget-header">Safety Tips</h5>
 						<ul>
 							<li>Meet seller at a public place</li>
