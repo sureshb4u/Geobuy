@@ -128,40 +128,43 @@
 							
 							</div>
 							<div class="tab-pane fade"  [ngClass]="{'show active' : 0 == selectedTab }"  id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-								<h3 class="tab-title">Product Specifications</h3>
+								<h3 class="tab-title">Seller Details</h3>
 								<table class="table table-bordered product-table">
 								  <tbody>
 								    <tr>
-								      <td>Seller Price</td>
-								      <td>$450</td>
+								      <td>Seller Name</td>
+								      <td>{{seller.orgname}}</td>
 								    </tr>
 								    <tr>
 								      <td>Added</td>
 								      <td>26th December</td>
+									</tr>
+									<tr>
+										<td>Street</td>
+										<td>{{seller.address.street}}</td>
+									  </tr>
+								    <tr>
+									<tr>
+										<td>City</td>
+										<td>{{seller.address.city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{seller.address.state}}</td>
+									</tr>
+								    <tr>
+
+								      <td>Country</td>
+								      <td>{{seller.address.country}}</td>
+								    </tr>
+								   
+								    <tr>
+								      <td>Email</td>
+								      <td>{{seller.orgemail}}</td>
 								    </tr>
 								    <tr>
-								      <td>State</td>
-								      <td>Dhaka</td>
-								    </tr>
-								    <tr>
-								      <td>Brand</td>
-								      <td>Apple</td>
-								    </tr>
-								    <tr>
-								      <td>Condition</td>
-								      <td>Used</td>
-								    </tr>
-								    <tr>
-								      <td>Model</td>
-								      <td>2017</td>
-								    </tr>
-								    <tr>
-								      <td>State</td>
-								      <td>Dhaka</td>
-								    </tr>
-								    <tr>
-								      <td>Battery Life</td>
-								      <td>23</td>
+								      <td>Contact</td>
+								      <td>{{seller.orgphoneno}}</td>
 								    </tr>
 								  </tbody>
 								</table>

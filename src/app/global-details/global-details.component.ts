@@ -46,7 +46,7 @@ export class GlobalDetailsComponent implements OnInit, AfterViewInit {
         this.router.queryParams.subscribe(params => {
           var qP ={ "id" :params.id, "sid" : params.sid};
           this.getProducts(qP);
-      })
+        })
     }
   
      
