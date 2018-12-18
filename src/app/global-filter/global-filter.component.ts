@@ -15,37 +15,46 @@ export class GlobalFilterComponent implements OnInit {
   
   locationFilters = [];
 
-  ngOnInit() {
-    if(window.navigator.geolocation)  {
-      window.navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords.latitude+'         '+position.coords.longitude);
-        
-        this.router.queryParams.subscribe(params => {
-          this.getCategoryDetails(params);
-          this.getLocationByCategory(params, position.coords.latitude, position.coords.longitude);
-        })
 
-      });
-    } else {
-        this.router.queryParams.subscribe(params => {
-          this.getCategoryDetails(params);
-        })
-    }
+  ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      this.getCategoryDetails(params);
+      if(window.navigator.geolocation)  {
+          window.navigator.geolocation.getCurrentPosition(position => {
+            console.log(position.coords.latitude+'         '+position.coords.longitude);
+            this.getLocationByCategory(params, position.coords.latitude, position.coords.longitude);  
+          });
+      } 
+    })
+    
 
     
   }
 
   getLocationByCategory(params, lat, lon) {
-    var Qp = {'category':params.category, 'lat':lat , 'lon':lon};
-    this.filterService.getLocationCategory(Qp).subscribe(response =>{ 
-          this.locationFilters = response;
-    });
+    if(lat && lon) {
+      var Qp = {'category':params.category, 'lat':lat , 'lon':lon};
+      this.filterService.getLocationCategory(Qp).subscribe(response =>{ 
+            this.locationFilters = response;
+      });
+    }
   }
 
   getCategoryDetails(params) {
+    console.log('**********');
+    console.log(params);
+    console.log('**********');
     this.filterService.getCategoryDetails(params).subscribe(response =>{ 
   //    console.log(response);
       this.categoryDetails = response;
     });
+  }
+
+  onChkChange(val){
+    if(val)
+        return false;
+    else
+        return true;
+    
   }
 }

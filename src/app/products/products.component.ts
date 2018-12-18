@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit {
   masterCategories;
   categories = [];
   categoryNameMap={};
+  category;
 
   ngOnInit() {
     
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(params) {
+    this.category = params.tittle;
     this.productsService.getProducts(params).subscribe(response => this.products = response);
   }
 

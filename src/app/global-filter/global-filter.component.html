@@ -1,9 +1,9 @@
 <div>
-    <div class="widget category-list" *ngIf="locationFilters" >
+    <div class="widget category-list" *ngIf="locationFilters[0]" >
         <h4 class="widget-header">Nearby in {{locationFilters[0].org.address.city}}</h4>
         <ul class="category-list">
 
-          <li *ngFor="let location of locationFilters"><mdb-checkbox [default]="true">{{location.org.address.street}} </mdb-checkbox></li>
+          <li *ngFor="let location of locationFilters"><mdb-checkbox [default]="true"  (change)="location.checked = onChkChange(location.checked)"   [checked]="location.checked">{{location.org.address.street}} </mdb-checkbox></li>
        
         </ul>
       </div>
@@ -11,7 +11,7 @@
       <div class="widget category-list">
         <h4 class="widget-header">Category</h4>
         <ul class="category-list">
-          <li *ngFor="let subcat of categoryDetails.subcategory"><mdb-checkbox [default]="true">{{subcat.tittle}}</mdb-checkbox> </li>
+          <li *ngFor="let subcat of categoryDetails.subcategory"><mdb-checkbox [default]="true" (change)="subcat.checked = onChkChange(subcat.checked)"  [checked]="subcat.checked">{{subcat.tittle}}</mdb-checkbox> </li>
         </ul>
       </div>
 

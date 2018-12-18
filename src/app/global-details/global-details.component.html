@@ -92,7 +92,7 @@
 								  </tbody>
 								</table>
 							</div>
-							<div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+							<div  *ngIf="product.reviews" class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								<h3 class="tab-title">Product Review</h3>
 								<div  *ngFor="let review of product.reviews; let i = index">
 									<div class="product-review" *ngIf="review.review">
