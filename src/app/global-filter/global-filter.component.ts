@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ FilterService} from '../filter.service';
 import { ActivatedRoute } from '@angular/router';
+import {ProductsComponent} from '../products/products.component' 
 
 @Component({
   selector: 'app-global-filter',
@@ -9,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GlobalFilterComponent implements OnInit {
 
-  constructor(private filterService : FilterService, public router: ActivatedRoute) { }
+  constructor(private filterService : FilterService, public router: ActivatedRoute, public productsComponent: ProductsComponent) { }
 
-  categoryDetails = {};
+  categoryDetails = { subcategory:[]};
   
   locationFilters = [];
 
@@ -25,10 +26,7 @@ export class GlobalFilterComponent implements OnInit {
             this.getLocationByCategory(params, position.coords.latitude, position.coords.longitude);  
           });
       } 
-    })
-    
-
-    
+    })    
   }
 
   getLocationByCategory(params, lat, lon) {
@@ -41,11 +39,7 @@ export class GlobalFilterComponent implements OnInit {
   }
 
   getCategoryDetails(params) {
-    console.log('**********');
-    console.log(params);
-    console.log('**********');
     this.filterService.getCategoryDetails(params).subscribe(response =>{ 
-  //    console.log(response);
       this.categoryDetails = response;
     });
   }
@@ -55,6 +49,21 @@ export class GlobalFilterComponent implements OnInit {
         return false;
     else
         return true;
+  }
+
+  onApplyFilter (){
     
+    this.router.queryParams.subscribe(params => {
+      console.log(params);
+      var sc=[];
+      for(var i=0; i < this.categoryDetails.subcategory.length; i++){
+        if(this.categoryDetails.subcategory[i].checked){
+          sc.push(this.categoryDetails.subcategory[i].id);
+        }
+      }
+
+      var Qparams = { 'category': params.category, 'tittle' : params.tittle, 'subcategory' : sc};
+      this.productsComponent.getProducts(Qparams);
+    })
   }
 }
