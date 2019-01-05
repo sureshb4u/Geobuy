@@ -8,7 +8,7 @@
 					<h1 class="product-title">{{product.title}}</h1>
 					<div class="product-meta">
 						<ul class="list-inline">
-							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a  [routerLink]="['/seller']" [queryParams]="{orgid:product.orgid}" >{{product.orgname}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a  [routerLink]="['/seller']" [queryParams]="{orgname:product.orgname, orgid:product.orgid}" >{{product.orgname}}</a></li>
 							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">{{categoryNameMap[product.subcategory]}}</a></li>
 							<li *ngIf="product.distance" class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a routerLink=""> {{product.distance}} Km away</a></li>
 						</ul>
