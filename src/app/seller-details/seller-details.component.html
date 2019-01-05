@@ -239,16 +239,6 @@
 				<div class="sidebar">
 						<div class="widget map" >
 								<h5 class="widget-header">Seller location</h5>
-							<!--	<div class="btn-group" mdbDropdown>
-										<button mdbDropdownToggle type="button" mdbBtn color="info" class="dropdown-toggle waves-light" mdbWavesEffect>
-												{{product.orgname}}
-										</button>
-								
-										<div class="dropdown-menu dropdown-primary">
-											<a class="dropdown-item" href="/details?id={{seller.id}}"  *ngFor="let seller of productDetails; let i = index">{{seller.orgname}}</a>
-										</div>
-									</div>
-								-->
 								<agm-map [latitude]="seller.orgLat" [longitude]="seller.orgLon"  style="height: 200px" >
 									<agm-marker	 [latitude]="seller.orgLat" [longitude]="seller.orgLon">
 										<agm-info-window [disableAutoPan]="true" #infoWindow>
@@ -268,7 +258,16 @@
 								</agm-map>		
 		
 						</div>
-					
+						<div class="widget" >
+								<h5  class="widget-header"> Available items</h5>
+								<div class="short-popular-category-list text-center">
+										<ul class="list-inline">
+												<li class="list-inline-item fa" *ngFor="let cat of sellerCategories">
+													{{cat.tittle}} ,
+												</li>
+										</ul>
+								</div>							
+						</div>
 				
 					<!-- Rate Widget -->
 					<div class="widget rate white-text" style="background :#c7003d">

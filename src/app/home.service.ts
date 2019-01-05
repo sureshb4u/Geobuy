@@ -31,6 +31,14 @@ export class HomeService {
         );
       }
 
+      getSellerCategories(sellerid): Observable<any> {
+        var url = this.apiConfig.hostUrl+"seller/"+sellerid+'/categories';
+        console.log('url ::'+url );
+        return this.http.get<any>(url).pipe(
+          tap(res => console.log(res))
+        );
+      }
+
     getTrendings(): Observable<any> {
       var url = this.apiConfig.hostUrl+"trendings";
       console.log('url ::'+url );

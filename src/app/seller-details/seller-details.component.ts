@@ -18,6 +18,7 @@ export class SellerDetailsComponent implements OnInit {
   selectedTab=0;
   categoryNameMap={};
   categories = [];
+  sellerCategories =[];
   ngOnInit() {
 
     this.appService.getCategories()
@@ -30,8 +31,11 @@ export class SellerDetailsComponent implements OnInit {
         }
       }
     }) ;
-
+    
     this.router.queryParams.subscribe(params => {
+      this.appService.getSellerCategories(params.orgid).subscribe(response => {
+        this.sellerCategories = response;
+      }) ;
       this.getSellerDetails(params);
       
     });
