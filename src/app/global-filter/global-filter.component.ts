@@ -55,14 +55,19 @@ export class GlobalFilterComponent implements OnInit {
     
     this.router.queryParams.subscribe(params => {
       console.log(params);
-      var sc=[];
+      var sc=[]; var lf =[]; 
       for(var i=0; i < this.categoryDetails.subcategory.length; i++){
         if(this.categoryDetails.subcategory[i].checked){
           sc.push(this.categoryDetails.subcategory[i].id);
         }
       }
-
-      var Qparams = { 'category': params.category, 'tittle' : params.tittle, 'subcategory' : sc};
+      for(var i=0; i < this.locationFilters.length; i++){
+        if(this.locationFilters[i].checked){
+          for(var j=0; j < this.locationFilters[i].orgs.length; j++)
+            lf.push(this.locationFilters[i].orgs[j].orgid);
+        }
+      }
+      var Qparams = { 'category': params.category, 'tittle' : params.tittle, subcategory : (sc != [] ? sc : '' ), orgIds : (lf !=[] ? lf : '')};
       this.productsComponent.getProducts(Qparams);
     })
   }
