@@ -13,7 +13,7 @@ export class SellerDetailsComponent implements OnInit {
   constructor(private sellerService : SellerService, private router : ActivatedRoute, private appService: HomeService) { }
 
   productDetails =[];
-  seller = {}
+  seller:any = {};
   selected=0;
   selectedTab=0;
   categoryNameMap={};
