@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ ProductsService} from '../products.service';
 import{ HomeService} from '../home.service';
+import { CommunicationService } from '../communication.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productsService : ProductsService, private homeService: HomeService, public router: ActivatedRoute) {  }
+  constructor(
+    private productsService : ProductsService, 
+    private homeService: HomeService,
+    private service: CommunicationService, 
+    public router: ActivatedRoute) {  }
 
   products =[];
   masterCategories;
@@ -19,7 +24,7 @@ export class ProductsComponent implements OnInit {
   category;
 
   ngOnInit() {
-    
+    console.log(this.service.getFilterData());
     this.homeService.getMasterCategory()
       .subscribe(response => this.masterCategories = response) ;
       this.homeService.getCategories()
@@ -35,6 +40,7 @@ export class ProductsComponent implements OnInit {
       this.router.queryParams.subscribe(params => {
         console.log(params);
         this.getProducts(params);
+
      })
    
   }
