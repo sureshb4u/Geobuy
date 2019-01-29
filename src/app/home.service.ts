@@ -40,7 +40,7 @@ export class HomeService {
       }
 
     getTrendings(): Observable<any> {
-      var url = this.apiConfig.hostUrl+"trendings";
+      var url = this.apiConfig.hostUrl+"banners";
       console.log('url ::'+url );
       return this.http.get<any>(url).pipe(
         tap(res => console.log(res))
