@@ -15,6 +15,7 @@ import { AgmCoreModule } from '@agm/core';
 import { SellerDetailsComponent } from './seller-details/seller-details.component';
 import { SellerService } from './seller.service';
 import { GooglePlacesDirective } from './directives/google-places.directive'
+import { CommunicationService} from './communication.service'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { GooglePlacesDirective } from './directives/google-places.directive'
     })
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ApiConfigService, HomeService, ProductsService, SellerService],
+  providers: [ApiConfigService, HomeService, ProductsService, SellerService, CommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

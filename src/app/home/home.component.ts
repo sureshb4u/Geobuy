@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ HomeService} from '../home.service';
 import {Router} from "@angular/router";
+import { CommunicationService } from '../communication.service'
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private appService: HomeService, private router: Router) { }
+
+  constructor(private appService: HomeService, private router: Router,private service:CommunicationService) { }
 
   masterCategories;
   categories = [];
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
         }
       }) ;
       this.getTrendingProducts();
+      console.log(this.service.getFilterData());
     }
 
     getTrendingProducts() {
@@ -46,7 +49,7 @@ export class HomeComponent implements OnInit {
       });
     }
 
-    setLocation(selectedLocation ){
+    setLocation(selectedLocation){
         console.log(selectedLocation);
     }
 
