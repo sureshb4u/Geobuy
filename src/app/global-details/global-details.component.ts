@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import{ ProductsService} from '../products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import{ HomeService} from '../home.service';
 
 @Component({
@@ -14,7 +14,11 @@ export class GlobalDetailsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     
   }
-  constructor(private productsService : ProductsService, public router: ActivatedRoute, private appService: HomeService) { }
+  constructor(
+    private productsService : ProductsService, 
+    public router: ActivatedRoute, 
+    private appService: HomeService,
+  public routes: Router) { }
   product:any;
   productDetails=[];
   selected=0;
@@ -104,6 +108,10 @@ export class GlobalDetailsComponent implements OnInit, AfterViewInit {
       }
     } else
         return 'No reviews yet';
+  }
+
+  changeRoute(path){
+    this.routes.navigate([path]);
   }
 }
 

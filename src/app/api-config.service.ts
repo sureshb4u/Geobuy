@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 export class ApiConfigService {
 
   public hostUrl:string = "https://geobuy-viki19nesh.c9users.io/";
+  public RAZORPAY_KEY = "rzp_test_Jxn6hzKiRtQjak";
   constructor() { }
 
   addQueryParams(url, param) {

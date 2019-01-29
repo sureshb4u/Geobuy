@@ -179,7 +179,7 @@
 						<!--<h4>Price</h4> -->
 						<h4> <span class="text-white" >₹ {{calculatePrice(product)}} </span></h4>
 						<div *ngIf="product.offer"> <span class="yellow-text" style="text-decoration: line-through;padding-right: 10px">₹ {{product.price}}</span> <span class="green-text" > {{product.offer}}% off</span> </div>
-						<button mdbBtn type="button" class="waves-light add-button" mdbWavesEffect  (click)="router.navigate(['/cart'])">Buy now</button>
+						<button mdbBtn type="button" class="waves-light add-button" mdbWavesEffect  (click)="changeRoute('/cart')">Buy now</button>
 						<button mdbBtn type="button" color="warning" class="waves-light" mdbWavesEffect>Add to Cart</button>
 						
 					</div>
