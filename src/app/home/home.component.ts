@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{ HomeService} from '../home.service';
+import {Router} from "@angular/router";
 import { CommunicationService } from '../communication.service'
 
 @Component({
@@ -9,11 +10,13 @@ import { CommunicationService } from '../communication.service'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private appService: HomeService,private service:CommunicationService) { }
+
+  constructor(private appService: HomeService, private router: Router,private service:CommunicationService) { }
 
   masterCategories;
   categories = [];
   trendings =[];
+  offers=[];
   categoryNameMap={};
 
 
@@ -35,11 +38,33 @@ export class HomeComponent implements OnInit {
     }
 
     getTrendingProducts() {
-      this.appService.getTrendings().subscribe(response => this.trendings = response);
+      this.appService.getTrendings().subscribe(response => {
+        this.trendings = response;
+        console.log(response)
+        for(var i=0; i<response.length; i++) {
+          if(response[i].isBanner)
+              this.offers.push(response[i]);
+        }
+      
+      });
     }
 
     setLocation(selectedLocation){
         console.log(selectedLocation);
+    }
+
+    openOffers(offer){
+      var linkId;
+      if(offer.isOrg) {
+        linkId = offer.linkId;
+        console.log('org');
+        this.router.navigate(['/products'], { queryParams: { productIds: linkId, tittle : offer.tittle }});
+      } else if(offer.isProducts) {
+        linkId = offer.linkId;
+        console.log('isProducts');
+        this.router.navigate(['/products'], { queryParams: { productIds: linkId, tittle : offer.tittle}});
+      }
+      console.log(linkId);
     }
   }
 
