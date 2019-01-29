@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
     'amount': '2000', // 2000 paise = INR 20
     'name': 'Merchant Name',
     'description': 'Purchase Description',
-    'image': '/your_logo.png',
+    'image': '/assets/images/Geobuy_white.png',
     'handler': function(response) {
         alert(response.razorpay_payment_id);
     },
