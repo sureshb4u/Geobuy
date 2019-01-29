@@ -15,7 +15,8 @@ import { AgmCoreModule } from '@agm/core';
 import { SellerDetailsComponent } from './seller-details/seller-details.component';
 import { SellerService } from './seller.service';
 import { GooglePlacesDirective } from './directives/google-places.directive'
-import { CommunicationService} from './communication.service'
+import { CommunicationService} from './communication.service';
+import { CartComponent } from './cart/cart.component'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CommunicationService} from './communication.service'
     GlobalFilterComponent,
     GlobalDetailsComponent,
     SellerDetailsComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    CartComponent
   ],
   imports: [
     BrowserModule,
