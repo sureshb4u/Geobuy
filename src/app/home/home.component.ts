@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       if(offer.isOrg) {
         linkId = offer.linkId;
         console.log('org');
-        this.router.navigate(['/products'], { queryParams: { productIds: linkId, tittle : offer.tittle }});
+        this.router.navigate(['/seller'], { queryParams: { orgid:linkId}});
       } else if(offer.isProducts) {
         linkId = offer.linkId;
         console.log('isProducts');

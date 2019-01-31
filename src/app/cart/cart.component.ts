@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WindowRefService } from '../window-ref.service';
 import { ApiConfigService } from '../api-config.service'
-
+import { CartService } from '../cart.service'
 
 
 @Component({
@@ -34,14 +34,37 @@ export class CartComponent implements OnInit {
     }
   };
 
-  constructor(private winRef : WindowRefService) { }
+  cartProducts: any;
+
+  constructor(private winRef : WindowRefService, private cartService : CartService) { }
 
   ngOnInit() {
+      this.cartService.getCartItems().subscribe(response => {
+   //     console.log(response);
+        var user = response;
+        var quanityMap= {};
+        for(var i=0; i<user.cart.length; i++) {
+          quanityMap[user.cart[i].id] = user.cart[i].quanity; 
+        }
+        for(var i=0; i<user.products.length; i++) {
+          user.products[i].quanity = quanityMap[user.products[i].id]; 
+        }
+        this.cartProducts = user.products;
+        console.log(this.cartProducts);
+      });
   }
 
   public initPay(): void {
     this.rzp1 = new this.winRef.nativeWindow.Razorpay(this.options);
     this.rzp1.open();
+  }
+
+  calculatePrice(product) {
+    var discount = 0;
+    if(product.offer > 0) {
+      discount = (parseFloat(product.offer) / 100) * product.price;
+    }
+    return parseFloat(''+((product.price - discount) * product.quanity)).toFixed(0);
   }
 
 }
