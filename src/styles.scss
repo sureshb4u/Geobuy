@@ -2506,3 +2506,14 @@ article.single-post p {
 .mt-0{
   margin-top: 0px;
 }
+.product-item .thumb-content{
+  position: relative;
+  height: 200px;
+  text-align: center;
+  padding: 8px;
+}
+
+.thumb-content img{
+  width: auto;
+  max-height: 100%
+}

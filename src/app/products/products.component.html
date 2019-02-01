@@ -74,7 +74,7 @@
 									<div class="thumb-content" *ngIf="pro.productDetails[0].image">
 										 <div class="price" *ngIf="pro.productDetails[0].offer">{{pro.productDetails[0].offer}} % off</div> 
 										<a [routerLink]="['/details']" [queryParams]="{id:pro.productDetails[0].id, sid:pro.productDetails[0].orgid}">
-											<img class="card-img-top img-fluid" src="{{pro.productDetails[0].image[0]}}" alt="{{pro.productDetails[0].title}}" style="height:200px; width:75%;margin-top: 20px;margin-left: 30px;">
+											<img class="card-img-top img-fluid" src="{{pro.productDetails[0].image[0]}}" alt="{{pro.productDetails[0].title}}">
 										</a>
 									</div>
 									<div class="card-body">
