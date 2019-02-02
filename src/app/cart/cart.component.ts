@@ -67,4 +67,19 @@ export class CartComponent implements OnInit {
     return parseFloat(''+((product.price - discount) * product.quanity)).toFixed(0);
   }
 
+  changeQuanity(product, evnt){
+   var val = evnt.target.value;
+   for(var j=0; j<this.cartProducts.length; j++) {
+    if(this.cartProducts[j].id == product.id) {
+      this.cartProducts[j].quanity = val;
+      if(val !='' && val==0){
+        alert()
+        this.cartProducts.splice(j, 1);
+      } 
+    }
+   }
+      
+   // console.log('*******--'+product.quanity);
+
+  }
 }
