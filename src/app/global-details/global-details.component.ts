@@ -111,7 +111,7 @@ export class GlobalDetailsComponent implements OnInit, AfterViewInit {
   }
 
   changeRoute(path){
-    this.routes.navigate([path]);
+    this.routes.navigate([path], { queryParams: { id: this.product.id}});
   }
 }
 
