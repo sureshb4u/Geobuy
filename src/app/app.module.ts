@@ -17,6 +17,11 @@ import { SellerService } from './seller.service';
 import { GooglePlacesDirective } from './directives/google-places.directive'
 import { CommunicationService} from './communication.service';
 import { CartComponent } from './cart/cart.component'
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +32,13 @@ import { CartComponent } from './cart/cart.component'
     GlobalDetailsComponent,
     SellerDetailsComponent,
     GooglePlacesDirective,
-    CartComponent
+    CartComponent,
+    LoginComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),

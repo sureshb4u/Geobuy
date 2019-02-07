@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  firebase: {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "geobuy-90797.firebaseapp.com",
+    databaseURL: "https://geobuy-90797.firebaseio.com",
+    projectId: "geobuy-90797",
+    storageBucket: "geobuy-90797.appspot.com",
+    messagingSenderId: "1025907724611"
+  },
+  production:false
 };
 
 /*
