@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AuthService } from '../auth.service'
+import { FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,8 @@ import { AuthService } from '../auth.service'
 export class LoginComponent implements OnInit {
 
   constructor(public authService: AuthService){}
+  loginFormModalEmail = new FormControl('', Validators.email);
+  loginFormModalPassword = new FormControl('', Validators.required);
 
   errorMessage;
   successMessage;
